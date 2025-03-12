@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import { NilsanStoreContext } from "@/store/nilsan/Context";
 import { createAction } from "@/store/nilsan/Actions";
 import { count, from, groupBy, mergeMap, min } from "rxjs";
+import classNames from "classnames";
 
 export function PersonGroupsSettings() {
   const [state, dispatch] = useContext(NilsanStoreContext)!;
@@ -34,7 +35,7 @@ export function PersonGroupsSettings() {
   }
 
   return (
-    <div className="flex justify-between">
+    <div className={classNames("flex", "justify-between", { "hidden": state.participantList.length <= 0 })}>
       <div>
         <span className="px-3 py-2">Nombre de groupes:</span>
         <button onClick={decrement} className="hover:bg-dark-secondary hover:text-dark-on-secondary cursor-pointer px-3 py-2 bg-dark-secondary-container text-dark-on-secondary-container rounded-xl"><FontAwesomeIcon icon={faMinus} /></button>

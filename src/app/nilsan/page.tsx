@@ -25,7 +25,9 @@ export default function Nilsan() {
             <PersonList />
           </div>
           <div className="flex flex-col w-2/3 m-5">
-            <PersonGroupsSettings />
+            { state.participantList.length <= 0
+                ? ( <div className="absolute -translate-y-1/2 -translate-x-1/2 top-1/3 left-1/2 text-5xl">Pour commencer, ajoutez des participants</div> )
+                : ( <PersonGroupsSettings /> ) }
             <PersonGroupList />
           </div>
         </div>
