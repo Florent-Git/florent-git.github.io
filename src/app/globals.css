@@ -1,24 +1,50 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-dark-primary: #ffb2ba;
+  --color-dark-on-primary: #561d26;
+  --color-dark-primary-container: #72333c;
+  --color-dark-on-primary-container: #ffd9dc;
+  --color-dark-secondary: #e5bdc0;
+  --color-dark-on-secondary: #43292c;
+  --color-dark-secondary-container: #5c3f42;
+  --color-dark-on-secondary-container: #ffd9dc;
+  --color-dark-tertiary: #e9bf8e;
+  --color-dark-on-tertiary: #442b06;
+  --color-dark-tertiary-container: #5d411b;
+  --color-dark-on-tertiary-container: #ffddb6;
+  --color-dark-error: #ffb4ab;
+  --color-dark-on-error: #690005;
+  --color-dark-error-container: #93000a;
+  --color-dark-on-error-container: #ffdad6;
+  --color-dark-surface-dim: #1a1112;
+  --color-dark-surface: #1a1112;
+  --color-dark-surface-bright: #413737;
+  --color-dark-on-surface: #f0dedf;
+  --color-dark-on-surface-var: #d7c1c2;
+  --color-dark-on-surface-outline: #9f8c8d;
+  --color-dark-on-surface-outline-var: #524344;
+  --color-dark-inverse-surface: #f0dedf;
+  --color-dark-on-inverse-surface: #382e2f;
 }
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+.construction-animation {
+  transform: rotate(9deg);
+  animation: dropConstruction 1s ease-in-out;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@keyframes dropConstruction {
+  from {
+    transform: rotate(0deg);
+    top: -1000px;
   }
-}
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  90% {
+    transform: rotate(0deg);
+  }
+
+  to {
+    top: calc(var(--spacing) * -4);
+    transform: rotate(9deg);
+  }
 }
