@@ -11,7 +11,7 @@ export function PersonGroupsSettings() {
   const [maxGroups, setMaxGroups] = useState(0);
 
   useEffect(() => {
-    const subscription = from(state.participantList).pipe(
+    const subscription = from(state.selectedList).pipe(
       groupBy(p => p.group),
       mergeMap(groups => groups.pipe(count())),
       min()
