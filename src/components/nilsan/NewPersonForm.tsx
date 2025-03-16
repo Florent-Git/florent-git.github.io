@@ -1,6 +1,6 @@
 import { NilsanGroup } from "@/model/nilsan";
-import { createAction } from "@/store/nilsan/Actions";
-import { NilsanStoreContext } from "@/store/nilsan/Context";
+import { createAction } from "@/store/implementation/basicStore";
+import { NilsanStoreContext } from "@/store/nilsan";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useContext } from "react";

@@ -1,17 +1,15 @@
 "use client";
 
 import { NewPersonForm } from "@/components/nilsan/NewPersonForm";
-import { nilsanInitialState } from "@/store/nilsan/State";
-import { NilsanStoreContext } from "@/store/nilsan/Context";
 import { useReducer } from "react";
-import { nilsanReducer } from "@/store/nilsan/Reducer";
+import { initialState, nilsanReducer, NilsanStoreContext } from "@/store/nilsan";
 import { PersonList } from "@/components/nilsan/PersonList";
 import { ImportExportData } from "@/components/nilsan/ImportExportData";
 import { PersonGroupsSettings } from "@/components/nilsan/PersonGroupsSettings";
 import { PersonGroupList } from "@/components/nilsan/PersonGroupList";
 
 export default function Nilsan() {
-  const [state, dispatch] = useReducer(nilsanReducer, nilsanInitialState);
+  const [state, dispatch] = useReducer(nilsanReducer, initialState);
 
   return (
     <NilsanStoreContext.Provider value={[state, dispatch]}>

@@ -1,9 +1,9 @@
-import { createAction } from "@/store/nilsan/Actions";
-import { NilsanStoreContext } from "@/store/nilsan/Context";
 import { faSave, faDownload } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ChangeEvent, useContext } from "react";
 import { toBase64 } from "js-base64";
+import { NilsanStoreContext } from "@/store/nilsan";
+import { createAction } from "@/store/implementation/basicStore";
 
 export function ImportExportData() {
   const [state, dispatch] = useContext(NilsanStoreContext)!;

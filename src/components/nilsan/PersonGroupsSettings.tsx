@@ -1,14 +1,16 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faMinus, faShuffle } from "@fortawesome/free-solid-svg-icons";
-import { useContext, useEffect, useState } from "react";
-import { NilsanStoreContext } from "@/store/nilsan/Context";
-import { createAction } from "@/store/nilsan/Actions";
+import { useContext, useEffect, useMemo, useState } from "react";
 import { count, from, groupBy, mergeMap, min } from "rxjs";
 import classNames from "classnames";
+import { NilsanStoreContext } from "@/store/nilsan";
+import { createAction } from "@/store/implementation/basicStore";
 
 export function PersonGroupsSettings() {
   const [state, dispatch] = useContext(NilsanStoreContext)!;
   const [maxGroups, setMaxGroups] = useState(0);
+
+  const participantList = useMemo(() => state.participantList, [state.participantList]);
 
   useEffect(() => {
     const subscription = from(state.selectedList).pipe(
@@ -18,20 +20,20 @@ export function PersonGroupsSettings() {
     ).subscribe(setMaxGroups);
 
     return () => subscription.unsubscribe();
-  }, [state.participantList]);
+  }, [participantList]);
 
   function increment() {
     if (state.nOfGroups < maxGroups)
-      dispatch(createAction("Increment", {}));
+      dispatch(createAction("IncrementGroupCount"));
   }
 
   function decrement() {
     if (state.nOfGroups > 1)
-      dispatch(createAction("Decrement", {}));
+      dispatch(createAction("DecrementGroupCount"));
   }
 
   function shuffle() {
-    dispatch(createAction("ShuffleSelectedPeople", {}));
+    dispatch(createAction("ShuffleSelectedPeople"));
   }
 
   return (

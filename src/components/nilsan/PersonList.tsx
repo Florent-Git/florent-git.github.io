@@ -1,6 +1,6 @@
-import { NilsanStoreContext } from "@/store/nilsan/Context";
 import { useContext } from "react";
 import { PersonItem } from "./PersonItem";
+import { NilsanStoreContext } from "@/store/nilsan";
 
 export const PersonList = function() {
   const [state, _] = useContext(NilsanStoreContext)!;

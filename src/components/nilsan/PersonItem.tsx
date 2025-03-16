@@ -1,11 +1,11 @@
 import { Person } from "@/model/nilsan";
-import { createAction } from "@/store/nilsan/Actions";
-import { NilsanStoreContext } from "@/store/nilsan/Context";
 import { ChangeEvent, useContext } from "react";
 import { createListStyle } from "../ListStyle";
 import classNames from "classnames";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { NilsanStoreContext } from "@/store/nilsan";
+import { createAction } from "@/store/implementation/basicStore";
 
 export type PersonItemProps = {
   person: Person,
