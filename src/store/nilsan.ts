@@ -26,8 +26,9 @@ export type NilsanActions = {
   LoadData: { persons: Person[] }
   IncrementGroupCount: {}
   DecrementGroupCount: {}
-  ShuffleSelectedPeople: {},
+  ShuffleSelectedPeople: {}
   SetGroups: { groups: Person[][] }
+  ChangeGroup: { person: Person, targetGroup: number }
 }
 
 export const NilsanStoreContext = createContext<ReturnType<typeof useReducer<NilsanState, [action: Action<NilsanActions, keyof NilsanActions>]>> | undefined>(undefined);
@@ -60,5 +61,11 @@ export const nilsanReducer = createReducer<NilsanState, NilsanActions>({
   IncrementGroupCount: (state, _) => ({ ...state, nOfGroups: state.nOfGroups + 1 }),
   DecrementGroupCount: (state, _) => ({ ...state, nOfGroups: state.nOfGroups - 1 }),
   ShuffleSelectedPeople: (state, _) => ({ ...state, selectedList: shuffle(state.selectedList) }),
-  SetGroups: (state, { groups }) => ({ ...state, groups })
+  SetGroups: (state, { groups }) => ({ ...state, groups }),
+  ChangeGroup: (state, { person, targetGroup }) => {
+    const newGroups = state.groups.map(group => group.filter(p => p.id != person.id));
+    if (newGroups[targetGroup] == undefined) newGroups[targetGroup] = [];
+    newGroups[targetGroup] = [...newGroups[targetGroup], person];
+    return { ...state, groups: newGroups }
+  }
 });

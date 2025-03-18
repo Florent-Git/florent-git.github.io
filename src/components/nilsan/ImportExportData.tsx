@@ -21,7 +21,6 @@ export function ImportExportData() {
   function onExportData() {
     const exportFileBtn: HTMLAnchorElement = document.querySelector("#exportFile")!;
     exportFileBtn.href = "data:text/plain;base64," + toBase64(JSON.stringify(state.participantList));
-    console.log(exportFileBtn);
     exportFileBtn.click();
   }
 

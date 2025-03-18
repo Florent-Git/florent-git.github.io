@@ -55,6 +55,8 @@ export function createReducer<S, A>(reducer: Reducer<S, A>) {
     // Create a deep copy of the state to ensure immutability.
     const newState = state; //structuredClone(state);
 
+    console.log(`[DISPATCH] ${String(action.type)}: ${JSON.stringify(action)}`)
+
     // Invoke the appropriate reducer function based on the action type.
     return reducer[action.type](newState, action);
   };

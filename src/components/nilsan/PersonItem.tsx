@@ -1,5 +1,5 @@
 import { Person } from "@/model/nilsan";
-import { ChangeEvent, useContext } from "react";
+import { ChangeEvent, DragEventHandler, useContext } from "react";
 import { createListStyle } from "../ListStyle";
 import classNames from "classnames";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -29,7 +29,8 @@ export const PersonItem: React.FC<PersonItemProps> = ({
 
   const personId = person.id;
 
-  const isChecked = state.selectedList
+  const isChecked = state.groups
+    .flatMap(p => p)
     .filter(p => p.id == person.id).length >= 1;
 
   function onCheck(ev: ChangeEvent) {
@@ -48,8 +49,12 @@ export const PersonItem: React.FC<PersonItemProps> = ({
 
   const style = listStyle(index, arrayCount);
 
+  const onDragStart: DragEventHandler<HTMLLIElement> = (ev) => {
+    ev.dataTransfer.setData("person", JSON.stringify(person));
+  }
+
   return (
-    <li className={classNames(style["line"])}>
+    <li className={classNames(style["line"])} draggable={true} onDragStart={onDragStart}>
       <div className={classNames(style["firstElement"])}>
         <input id={personId} type="checkbox" checked={isChecked} onChange={onCheck} />
       </div>

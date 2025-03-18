@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faMinus, faShuffle } from "@fortawesome/free-solid-svg-icons";
-import { useContext, useEffect, useMemo, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { count, from, groupBy, mergeMap, min } from "rxjs";
 import classNames from "classnames";
 import { NilsanStoreContext } from "@/store/nilsan";
@@ -10,20 +10,21 @@ export function PersonGroupsSettings() {
   const [state, dispatch] = useContext(NilsanStoreContext)!;
   const [maxGroups, setMaxGroups] = useState(0);
 
-  const participantList = useMemo(() => state.participantList, [state.participantList]);
-
   useEffect(() => {
     const subscription = from(state.selectedList).pipe(
       groupBy(p => p.group),
       mergeMap(groups => groups.pipe(count())),
       min()
-    ).subscribe(setMaxGroups);
+    ).subscribe(max => {
+      setMaxGroups(max);
+      console.log(max);
+    });
 
     return () => subscription.unsubscribe();
-  }, [participantList]);
+  }, [state.participantList]);
 
   function increment() {
-    if (state.nOfGroups < maxGroups)
+    // if (state.nOfGroups < maxGroups)
       dispatch(createAction("IncrementGroupCount"));
   }
 
